@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seleni FC — Official Club Site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A2240;
+    --navy-deep:#071A33;
+    --ink:#0C1B2E;
+    --royal:#1A57C8;
+    --royal-bright:#2E6FE6;
+    --bg:#F1F4FA;
+    --surface:#FFFFFF;
+    --line:#E2E8F2;
+    --muted:#5B6B82;
+    --win:#1FAE63;
+    --draw:#94A2B8;
+    --loss:#E0473E;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Barlow',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  svg{display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .cond{font-family:'Barlow Condensed',sans-serif}
+  button{font-family:inherit;cursor:pointer}
+  :focus-visible{outline:2px solid var(--royal-bright);outline-offset:2px;border-radius:3px}
+
+  .eyebrow{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.22em;font-weight:600;font-size:.78rem;color:var(--royal)}
+  .section-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(1.8rem,4vw,2.7rem);line-height:.95;color:var(--ink);margin-top:4px}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:40;background:rgba(10,34,64,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav-inner{display:flex;align-items:center;gap:26px;height:70px}
+  .brand{display:flex;align-items:center;gap:11px;margin-right:auto}
+  .brand .cr{width:38px;height:44px}
+  .brand b{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:1.15rem;color:#fff;line-height:1}
+  .brand small{display:block;font-family:'Barlow Condensed';font-size:.6rem;letter-spacing:.34em;color:#9DB8E6;font-weight:600;margin-top:2px}
+  nav.links{display:flex;gap:26px}
+  nav.links a{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.12em;font-size:.92rem;font-weight:600;color:#B9C6DE;transition:color .2s;position:relative;padding:3px 0}
+  nav.links a:hover{color:#fff}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:-3px;height:2px;width:0;background:var(--royal-bright);transition:width .25s}
+  nav.links a:hover::after{width:100%}
+  .btn{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.1em;font-weight:700;font-size:.9rem;border:0;border-radius:3px;padding:10px 18px;transition:transform .15s,box-shadow .2s,background .2s}
+  .btn-primary{color:#fff;background:var(--royal)}
+  .btn-primary:hover{background:var(--royal-bright);transform:translateY(-1px);box-shadow:0 8px 20px rgba(26,87,200,.35)}
+  .btn-ghost{color:#fff;background:transparent;border:1px solid rgba(255,255,255,.28)}
+  .btn-ghost:hover{background:rgba(255,255,255,.1)}
+  .btn-light{background:var(--surface);color:var(--navy);border:1px solid var(--line)}
+  .btn-light:hover{border-color:var(--royal)}
+  .burger{display:none;background:none;border:0;color:#fff;padding:6px}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;color:#fff;
+    background:radial-gradient(120% 120% at 80% -10%,#163E73,transparent 55%),linear-gradient(160deg,#0A2240,#071A33)}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.5;
+    background:repeating-linear-gradient(115deg,transparent 0 38px,rgba(255,255,255,.025) 38px 76px)}
+  .hero-inner{position:relative;display:flex;align-items:center;gap:46px;padding:74px 0 84px;flex-wrap:wrap}
+  .hero .cr-lg{width:148px;height:174px;filter:drop-shadow(0 14px 30px rgba(0,0,0,.4));flex-shrink:0}
+  .hero h1{font-family:'Barlow Condensed';font-weight:800;text-transform:uppercase;font-size:clamp(3rem,9vw,6rem);line-height:.86;letter-spacing:.01em}
+  .hero h1 span{color:#7FB0FF}
+  .hero .tag{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.34em;font-weight:500;color:#AFC3E6;font-size:clamp(.8rem,2vw,1rem);margin-top:8px}
+  .stats{display:flex;gap:30px;margin-top:26px;flex-wrap:wrap}
+  .stats div b{font-family:'Barlow Condensed';font-weight:800;font-size:1.7rem;color:#fff;display:block;line-height:1}
+  .stats div small{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.18em;font-size:.62rem;color:#8FA6C8}
+
+  /* SECTION SHELL */
+  section.block{padding:70px 0}
+  .head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:30px;flex-wrap:wrap}
+
+  /* NEXT MATCH */
+  .next{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(12,27,46,.06)}
+  .next .top{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:var(--navy);color:#fff;font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.14em;font-size:.82rem}
+  .next .top .c{color:#7FB0FF;font-weight:700}
+  .next .fix{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:40px 24px}
+  .side{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+  .side .cr{width:74px;height:86px}
+  .side .nm{font-family:'Barlow Condensed';font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:1.25rem;color:var(--ink)}
+  .oppbadge{width:74px;height:74px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;letter-spacing:.02em}
+  .mid{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:210px}
+  .vs{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;color:var(--muted)}
+  .cd{display:flex;gap:12px}
+  .cd div{text-align:center}
+  .cd b{font-family:'Barlow Condensed';font-weight:800;font-size:1.9rem;color:var(--royal);line-height:1;display:block}
+  .cd small{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:.56rem;color:var(--muted)}
+  .next .foot{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;padding:16px 24px;border-top:1px solid var(--line);font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.1em;font-size:.82rem;color:var(--muted)}
+  .next .foot b{color:var(--ink);font-weight:600}
+
+  /* FORM STRIP */
+  .formrow{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
+  .formrow .lbl{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;color:var(--muted)}
+  .pip{width:30px;height:30px;border-radius:5px;display:grid;place-items:center;font-family:'Barlow Condensed';font-weight:800;font-size:.92rem;color:#fff}
+  .pip.W{background:var(--win)} .pip.D{background:var(--draw)} .pip.L{background:var(--loss)}
+
+  /* LISTS (fixtures + results) */
+  .matchsec.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .list{display:flex;flex-direction:column;gap:10px}
+  .row{display:grid;grid-template-columns:84px 1fr auto;align-items:center;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:14px 18px;transition:border-color .2s,box-shadow .2s}
+  .row:hover{border-color:#C9D6EC;box-shadow:0 6px 18px rgba(12,27,46,.06)}
+  .row .date{text-align:center;border-right:1px solid var(--line);padding-right:14px}
+  .row .date b{font-family:'Barlow Condensed';font-weight:800;font-size:1.5rem;color:var(--ink);display:block;line-height:1}
+  .row .date small{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.12em;font-size:.62rem;color:var(--muted)}
+  .row .mu{display:flex;flex-direction:column;gap:3px}
+  .row .mu .comp{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.14em;font-size:.66rem;color:var(--royal);font-weight:700}
+  .row .mu .teams{font-family:'Barlow Condensed';font-weight:700;font-size:1.15rem;color:var(--ink);text-transform:uppercase;letter-spacing:.02em}
+  .row .mu .teams em{font-style:normal;color:var(--royal)}
+  .row .mu .ven{font-size:.82rem;color:var(--muted)}
+  .row .end{display:flex;align-items:center;gap:12px}
+  .ha{font-family:'Barlow Condensed';font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:3px 9px;border-radius:3px}
+  .score{font-family:'Barlow Condensed';font-weight:800;font-size:1.7rem;color:var(--ink);min-width:62px;text-align:center}
+  .res-pill{width:30px;height:30px;border-radius:5px;display:grid;place-items:center;font-family:'Barlow Condensed';font-weight:800;color:#fff;font-size:.92rem}
+  .res-pill.W{background:var(--win)} .res-pill.D{background:var(--draw)} .res-pill.L{background:var(--loss)}
+  .empty{padding:34px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:7px}
+
+  /* CTA BAND */
+  .band{background:linear-gradient(120deg,#0A2240,#13386B);color:#fff;text-align:center;padding:64px 0}
+  .band h2{font-family:'Barlow Condensed';font-weight:800;text-transform:uppercase;font-size:clamp(1.8rem,5vw,3rem);line-height:.95}
+  .band p{color:#AFC3E6;max-width:440px;margin:12px auto 26px}
+
+  /* FOOTER */
+  footer{background:var(--navy-deep);color:#9DB1CE;padding:54px 0 30px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px;margin-bottom:36px}
+  .foot-brand{display:flex;gap:14px;align-items:flex-start}
+  .foot-brand .cr{width:46px;height:54px;flex-shrink:0}
+  .foot-brand p{font-size:.88rem;margin-top:8px;max-width:320px}
+  footer h4{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.18em;font-size:.74rem;color:#7FB0FF;margin-bottom:14px}
+  footer a{display:block;padding:5px 0;color:#9DB1CE;font-size:.9rem;transition:color .2s}
+  footer a:hover{color:#fff}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.1em;font-size:.72rem}
+  .foot-bottom button{background:none;border:0;color:#7FB0FF;font:inherit;text-transform:uppercase;letter-spacing:.1em;cursor:pointer}
+  .foot-bottom button:hover{color:#fff}
+
+  /* MANAGE PANEL */
+  .scrim{position:fixed;inset:0;background:rgba(7,18,34,.5);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s;z-index:60}
+  .scrim.open{opacity:1;visibility:visible}
+  .panel{position:fixed;top:0;right:0;height:100%;width:min(480px,100%);background:var(--bg);z-index:70;transform:translateX(100%);transition:transform .42s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.3)}
+  .panel.open{transform:translateX(0)}
+  .panel .ph{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;background:var(--navy);color:#fff}
+  .panel .ph b{font-family:'Barlow Condensed';font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:1.2rem}
+  .panel .ph button{background:none;border:0;color:#fff;font-size:1.4rem;line-height:1}
+  .tabs{display:flex;border-bottom:1px solid var(--line);background:#fff}
+  .tabs button{flex:1;padding:14px;background:none;border:0;border-bottom:3px solid transparent;font-family:'Barlow Condensed';font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-size:.95rem}
+  .tabs button.active{color:var(--royal);border-bottom-color:var(--royal)}
+  .panel .body{flex:1;overflow-y:auto;padding:20px 22px}
+  .ed{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:20px}
+  .ed h3{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.08em;font-size:1.05rem;color:var(--ink);margin-bottom:14px}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.1em;font-size:.7rem;color:var(--muted);margin-bottom:5px}
+  .field input,.field select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:5px;font:inherit;font-size:.92rem;color:var(--ink);background:#fff}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--royal)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .ed-actions{display:flex;gap:10px;margin-top:6px}
+  .ed-actions .btn{flex:1;justify-content:center}
+  .mini-list{display:flex;flex-direction:column;gap:8px}
+  .mini{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+  .mini .mtxt{flex:1;min-width:0}
+  .mini .mtxt b{font-family:'Barlow Condensed';font-weight:700;font-size:1rem;color:var(--ink);display:block;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mini .mtxt small{font-size:.78rem;color:var(--muted)}
+  .mini .ic{background:none;border:1px solid var(--line);border-radius:5px;width:32px;height:32px;display:grid;place-items:center;color:var(--muted)}
+  .mini .ic:hover{border-color:var(--royal);color:var(--royal)}
+  .mini .ic.del:hover{border-color:var(--loss);color:var(--loss)}
+  .io-row{display:flex;gap:10px;margin-top:8px}
+  .io-row .btn{flex:1;justify-content:center}
+  .hint{font-size:.8rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:6px;font-family:'Barlow Condensed';letter-spacing:.06em;text-transform:uppercase;font-size:.9rem;opacity:0;transition:.25s;z-index:90;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:860px){
+    nav.links,.nav-inner .btn{display:none}
+    .burger{display:block}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .hero-inner{gap:28px}
+  }
+  @media(max-width:600px){
+    .next .fix{grid-template-columns:1fr;gap:24px}
+    .mid{order:3}
+    .row{grid-template-columns:64px 1fr;grid-row-gap:10px}
+    .row .end{grid-column:1/-1;justify-content:flex-start}
+    .foot-grid{grid-template-columns:1fr}
+    section.block{padding:52px 0}
+    .grid3{grid-template-columns:1fr}
+  }
+  /* SQUAD */
+  .squad-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .player{position:relative;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:linear-gradient(180deg,#103261,#0A2240);aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+  .player:hover{transform:translateY(-7px);box-shadow:0 18px 34px rgba(10,34,64,.28)}
+  .player .num{position:absolute;top:-8px;right:10px;font-family:'Barlow Condensed';font-weight:800;font-size:5.6rem;line-height:1;color:rgba(255,255,255,.08)}
+  .player .sil{position:absolute;inset:0;display:grid;place-items:center;opacity:.65;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  .player:hover .sil{transform:scale(1.05)}
+  .player .pinfo{position:relative;padding:16px;background:linear-gradient(180deg,transparent,rgba(7,18,34,.88) 60%)}
+  .player .ppos{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.18em;font-size:.62rem;color:#7FB0FF}
+  .player .pname{font-family:'Barlow Condensed';font-weight:700;text-transform:uppercase;font-size:1.12rem;color:#fff;line-height:1.05;margin-top:3px}
+  .player .pcap{display:inline-block;margin-top:7px;font-family:'Barlow Condensed';font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:#fff;padding:2px 8px;border-radius:3px;font-weight:700}
+
+  /* FOOTER TAGLINE */
+  .foot-tag{text-align:center;padding:6px 0 28px}
+  .foot-tag .ft-main{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.2em;font-weight:700;color:#fff;font-size:1.05rem}
+  .foot-tag .ft-sub{font-family:'Barlow Condensed';letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;color:#7FB0FF;margin-top:5px}
+
+  /* LOADING SPLASH */
+  body.loading{overflow:hidden}
+  #splash{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+    background:radial-gradient(120% 120% at 50% 28%,#163E73,transparent 60%),linear-gradient(160deg,#0A2240,#071A33);
+    transition:opacity .6s ease,visibility .6s}
+  #splash::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;background:repeating-linear-gradient(115deg,transparent 0 38px,rgba(255,255,255,.025) 38px 76px)}
+  #splash.done{opacity:0;visibility:hidden;pointer-events:none}
+  #splash .sp-crest{width:118px;height:138px;position:relative;filter:drop-shadow(0 12px 30px rgba(0,0,0,.45));animation:spPop .7s cubic-bezier(.2,.8,.2,1) both}
+  #splash .sp-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.18em;font-size:2.4rem;color:#fff;line-height:1;position:relative;animation:spUp .6s ease .14s both}
+  #splash .sp-name span{color:#7FB0FF}
+  #splash .sp-tag{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.34em;font-size:.7rem;color:#AFC3E6;position:relative;animation:spUp .6s ease .28s both}
+  #splash .sp-bar{width:168px;height:3px;border-radius:3px;background:rgba(255,255,255,.14);overflow:hidden;position:relative;margin-top:8px;animation:spUp .6s ease .4s both}
+  #splash .sp-bar i{position:absolute;top:0;left:-40%;height:100%;width:40%;border-radius:3px;background:linear-gradient(90deg,#2E6FE6,#7FB0FF);animation:spLoad 1.25s ease-in-out infinite}
+  @keyframes spPop{0%{opacity:0;transform:translateY(10px) scale(.82)}100%{opacity:1;transform:none}}
+  @keyframes spUp{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:none}}
+  @keyframes spLoad{0%{left:-40%}100%{left:100%}}
+
+  /* SCROLL REVEAL */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:860px){.squad-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:600px){.squad-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1!important;transform:none!important}#splash .sp-bar i{left:0!important;width:100%!important}}
+</style>
+</head>
+<body class="loading">
+
+<!-- inline crest -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <clipPath id="sh"><path d="M60 8 L110 24 L110 72 C110 104 88 124 60 132 C32 124 10 104 10 72 L10 24 Z"/></clipPath>
+  <linearGradient id="ng" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E2C52"/><stop offset="1" stop-color="#081C36"/></linearGradient>
+  <symbol id="crest" viewBox="0 0 120 140">
+    <g clip-path="url(#sh)">
+      <rect x="0" y="0" width="120" height="140" fill="url(#ng)"/>
+      <rect x="0" y="78" width="120" height="62" fill="#1A57C8"/>
+      <g fill="#fff" opacity="0.12"><rect x="22" y="78" width="6" height="62"/><rect x="46" y="78" width="6" height="62"/><rect x="70" y="78" width="6" height="62"/><rect x="94" y="78" width="6" height="62"/></g>
+      <path d="M10 50 L60 82 L110 50 L110 66 L60 98 L10 66 Z" fill="#fff"/>
+      <path d="M60 22 l4.8 10.4 11.4 1.1 -8.6 7.6 2.5 11.2 -10.1-5.9 -10.1 5.9 2.5-11.2 -8.6-7.6 11.4-1.1 Z" fill="#fff"/>
+    </g>
+    <path d="M60 8 L110 24 L110 72 C110 104 88 124 60 132 C32 124 10 104 10 72 L10 24 Z" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+  </symbol>
+</defs></svg>
+
+<!-- LOADING SPLASH -->
+<noscript><style>#splash{display:none!important}body.loading{overflow:auto!important}</style></noscript>
+<div id="splash" role="status" aria-label="Loading Seleni FC">
+  <svg class="sp-crest" aria-hidden="true"><use href="#crest"/></svg>
+  <div class="sp-name">SELENI <span>FC</span></div>
+  <div class="sp-tag">Creating champions for life</div>
+  <div class="sp-bar"><i></i></div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Seleni FC home">
+      <svg class="cr" aria-hidden="true"><use href="#crest"/></svg>
+      <span><b>Seleni FC</b><small>Est. 2026</small></span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#next">Next Match</a>
+      <a href="#fixtures">Fixtures</a>
+      <a href="#results">Results</a>
+      <a href="#squad">Squad</a>
+      <a href="#club">Club</a>
+    </nav>
+    <button class="btn btn-ghost" onclick="openPanel()">Manage</button>
+    <a class="btn btn-primary" href="#next">Tickets</a>
+    <button class="burger" aria-label="Open manager" onclick="openPanel()">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <svg class="cr-lg" aria-hidden="true"><use href="#crest"/></svg>
+    <div>
+      <h1>SELENI <span>FC</span></h1>
+      <p class="tag">Pride · Passion · Blue &amp; White</p>
+      <div class="stats" id="heroStats"></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT MATCH -->
+<section class="block matchsec" id="next">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <div><p class="eyebrow">Up Next</p><h2 class="section-title">Next Match</h2></div>
+      <a class="btn btn-light cond" href="#fixtures">All fixtures</a>
+    </div>
+    <div id="nextMount" class="reveal"></div>
+    <div class="formrow" id="formMount"></div>
+  </div>
+</section>
+
+<!-- FIXTURES -->
+<section class="block matchsec alt" id="fixtures">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <div><p class="eyebrow">Schedule</p><h2 class="section-title">Upcoming Fixtures</h2></div>
+      <button class="btn btn-light cond" onclick="openPanel('fixtures')">+ Add fixture</button>
+    </div>
+    <div class="list reveal" id="fixturesList"></div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="block matchsec" id="results">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <div><p class="eyebrow">Recent</p><h2 class="section-title">Latest Results</h2></div>
+      <button class="btn btn-light cond" onclick="openPanel('results')">+ Add result</button>
+    </div>
+    <div class="list reveal" id="resultsList"></div>
+  </div>
+</section>
+
+<!-- SQUAD -->
+<section class="block matchsec alt" id="squad">
+  <div class="wrap">
+    <div class="head-row reveal">
+      <div><p class="eyebrow">First Team</p><h2 class="section-title">The Squad</h2></div>
+      <button class="btn btn-light cond" onclick="openPanel('squad')">+ Add player</button>
+    </div>
+    <div class="squad-grid reveal" id="squadList"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="band">
+  <div class="wrap">
+    <h2>Come down to the ground</h2>
+    <p>Support the lads home and away. Entry details and membership for the new season below.</p>
+    <a class="btn btn-primary" href="#next" style="font-size:1rem;padding:13px 26px">Get matchday info</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="club">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <svg class="cr" aria-hidden="true"><use href="#crest"/></svg>
+        <div>
+          <b class="cond" style="font-size:1.2rem;color:#fff;text-transform:uppercase;letter-spacing:.06em">Seleni FC</b>
+          <p>The blue and white. Founded by friends, built on the pitch. Follow every fixture and result right here.</p>
+        </div>
+      </div>
+      <div>
+        <h4>Club</h4>
+        <a href="#next">Next Match</a><a href="#fixtures">Fixtures</a><a href="#results">Results</a>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <a href="#next">Tickets</a><a href="#">Join the squad</a><a href="#">Sponsor us</a>
+        <a href="#" onclick="openPanel();return false;">Manage site</a>
+      </div>
+    </div>
+    <div class="foot-tag">
+      <p class="ft-main">EST. 2026 — Creating champions for life</p>
+      <p class="ft-sub">Created by executive manager: Aryan Lala</p>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> Seleni Football Club</span>
+      <span><button onclick="openPanel()">Update fixtures &amp; results →</button></span>
+    </div>
+  </div>
+</footer>
+
+<!-- MANAGE PANEL -->
+<div class="scrim" id="scrim" onclick="closePanel()"></div>
+<aside class="panel" id="panel" aria-label="Manage fixtures and results">
+  <div class="ph"><b>Manage Seleni FC</b><button onclick="closePanel()" aria-label="Close">×</button></div>
+  <div class="tabs">
+    <button id="tabFix" class="active" onclick="switchTab('fixtures')">Fixtures</button>
+    <button id="tabRes" onclick="switchTab('results')">Results</button>
+    <button id="tabSqd" onclick="switchTab('squad')">Squad</button>
+  </div>
+  <div class="body">
+    <p class="hint">Add, edit or delete matches below. Changes save automatically on this device. Use <b>Export</b> to back them up or move them to your live website.</p>
+
+    <!-- FIXTURES EDITOR -->
+    <div id="paneFix">
+      <div class="ed">
+        <h3 id="fixFormTitle">Add a fixture</h3>
+        <div class="grid2">
+          <div class="field"><label>Date</label><input type="date" id="fDate"></div>
+          <div class="field"><label>Kick-off</label><input type="time" id="fTime" value="15:00"></div>
+        </div>
+        <div class="field"><label>Opponent</label><input type="text" id="fOpp" placeholder="e.g. Riverside Athletic"></div>
+        <div class="grid2">
+          <div class="field"><label>Home / Away</label><select id="fHome"><option value="true">Home</option><option value="false">Away</option></select></div>
+          <div class="field"><label>Competition</label><input type="text" id="fComp" placeholder="League" value="League"></div>
+        </div>
+        <div class="field"><label>Venue</label><input type="text" id="fVen" placeholder="Seleni Park"></div>
+        <div class="ed-actions">
+          <button class="btn btn-primary" onclick="saveFixture()">Save fixture</button>
+          <button class="btn btn-light" id="fCancel" style="display:none" onclick="resetFixtureForm()">Cancel</button>
+        </div>
+      </div>
+      <div class="mini-list" id="fixEditList"></div>
+    </div>
+
+    <!-- RESULTS EDITOR -->
+    <div id="paneRes" style="display:none">
+      <div class="ed">
+        <h3 id="resFormTitle">Add a result</h3>
+        <div class="field"><label>Date</label><input type="date" id="rDate"></div>
+        <div class="field"><label>Opponent</label><input type="text" id="rOpp" placeholder="e.g. Kingsbridge FC"></div>
+        <div class="grid2">
+          <div class="field"><label>Home / Away</label><select id="rHome"><option value="true">Home</option><option value="false">Away</option></select></div>
+          <div class="field"><label>Competition</label><input type="text" id="rComp" value="League"></div>
+        </div>
+        <div class="grid3">
+          <div class="field"><label>Seleni</label><input type="number" min="0" id="rGf" placeholder="0"></div>
+          <div class="field"><label>Opponent</label><input type="number" min="0" id="rGa" placeholder="0"></div>
+          <div class="field"><label>Venue</label><input type="text" id="rVen" placeholder="Seleni Park"></div>
+        </div>
+        <div class="ed-actions">
+          <button class="btn btn-primary" onclick="saveResult()">Save result</button>
+          <button class="btn btn-light" id="rCancel" style="display:none" onclick="resetResultForm()">Cancel</button>
+        </div>
+      </div>
+      <div class="mini-list" id="resEditList"></div>
+    </div>
+
+    <!-- SQUAD EDITOR -->
+    <div id="paneSquad" style="display:none">
+      <div class="ed">
+        <h3 id="sqdFormTitle">Add a player</h3>
+        <div class="grid3">
+          <div class="field"><label>Number</label><input type="number" min="1" id="sNum" placeholder="9"></div>
+          <div class="field" style="grid-column:span 2"><label>Player name</label><input type="text" id="sName" placeholder="Full name"></div>
+        </div>
+        <div class="field"><label>Position</label><input type="text" id="sPos" placeholder="e.g. Midfielder"></div>
+        <div class="field"><label style="display:flex;gap:8px;align-items:center;text-transform:none;letter-spacing:0;font-family:Barlow;font-size:.9rem;color:var(--ink)"><input type="checkbox" id="sCap" style="width:auto;margin:0">Club captain</label></div>
+        <div class="ed-actions">
+          <button class="btn btn-primary" onclick="savePlayer()">Save player</button>
+          <button class="btn btn-light" id="sCancel" style="display:none" onclick="resetPlayerForm()">Cancel</button>
+        </div>
+      </div>
+      <div class="mini-list" id="sqdEditList"></div>
+    </div>
+
+    <div class="io-row">
+      <button class="btn btn-light cond" onclick="exportData()">⤓ Export backup</button>
+      <button class="btn btn-light cond" onclick="document.getElementById('importFile').click()">⤒ Import</button>
+      <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importData(event)">
+    </div>
+    <div class="io-row"><button class="btn btn-light cond" style="flex:1;color:var(--loss)" onclick="resetAll()">Reset to sample data</button></div>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+/* ---------- loading splash ---------- */
+const splashStart = Date.now();
+function hideSplash(){
+  const s=document.getElementById('splash');
+  if(!s || s.classList.contains('done')) return;
+  s.classList.add('done');
+  document.body.classList.remove('loading');
+  setTimeout(()=>{ if(s && s.parentNode) s.parentNode.removeChild(s); }, 700);
+}
+function scheduleHide(){ setTimeout(hideSplash, Math.max(0, 1500-(Date.now()-splashStart))); }
+setTimeout(hideSplash, 5000); // safety net if init never completes
+
+/* ---------- storage layer: window.storage (Claude) → localStorage (self-hosted) ---------- */
+const KEY = 'selini:data';
+const Store = {
+  async load(){
+    if (typeof window!=='undefined' && window.storage && window.storage.get){
+      try{ const r = await window.storage.get(KEY, false); return r ? JSON.parse(r.value) : null; }catch(e){ return null; }
+    }
+    try{ const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
+  },
+  async save(d){
+    const v = JSON.stringify(d);
+    if (typeof window!=='undefined' && window.storage && window.storage.set){
+      try{ await window.storage.set(KEY, v, false); return; }catch(e){}
+    }
+    try{ localStorage.setItem(KEY, v); }catch(e){}
+  }
+};
+
+/* ---------- sample data ---------- */
+function sampleData(){
+  return {
+    club:'Seleni FC',
+    fixtures:[
+      {id:uid(), date:'2026-07-25', time:'15:00', comp:'League', opponent:'Riverside Athletic', home:true,  venue:'Seleni Park'},
+      {id:uid(), date:'2026-08-02', time:'14:00', comp:'League', opponent:'Kingsbridge FC',     home:false, venue:'Kingsbridge Recreation Ground'},
+      {id:uid(), date:'2026-08-09', time:'15:00', comp:'Cup',    opponent:'Hollowood Town',      home:true,  venue:'Seleni Park'},
+    ],
+    results:[
+      {id:uid(), date:'2026-06-14', comp:'League', opponent:'Eastfield United', home:true,  gf:3, ga:1, venue:'Seleni Park'},
+      {id:uid(), date:'2026-06-07', comp:'League', opponent:"St. Mark's",       home:false, gf:2, ga:2, venue:'Marsh Lane'},
+      {id:uid(), date:'2026-05-31', comp:'Cup',    opponent:'Marlow Rangers',   home:true,  gf:1, ga:0, venue:'Seleni Park'},
+      {id:uid(), date:'2026-05-24', comp:'League', opponent:'Northgate',        home:false, gf:0, ga:2, venue:'Northgate Park'},
+      {id:uid(), date:'2026-05-17', comp:'League', opponent:'Verdale FC',       home:true,  gf:4, ga:0, venue:'Seleni Park'},
+    ],
+    players:[
+      {id:uid(), num:1,  name:'Daniel Okafor',  pos:'Goalkeeper', captain:false},
+      {id:uid(), num:4,  name:'James Whitlock',  pos:'Defender',   captain:true},
+      {id:uid(), num:5,  name:'Tom Hargreaves',  pos:'Defender',   captain:false},
+      {id:uid(), num:6,  name:'Sam Ellison',     pos:'Midfielder', captain:false},
+      {id:uid(), num:8,  name:'Reece Carter',    pos:'Midfielder', captain:false},
+      {id:uid(), num:7,  name:'Leo Marchetti',   pos:'Winger',     captain:false},
+      {id:uid(), num:10, name:'Aryan Lala',      pos:'Forward',    captain:false},
+      {id:uid(), num:9,  name:'Marcus Boateng',  pos:'Striker',    captain:false},
+    ]
+  };
+}
+
+let DATA = sampleData();
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+
+/* ---------- helpers ---------- */
+const todayISO = ()=> new Date().toISOString().slice(0,10);
+function fmtDay(iso){ const d=new Date(iso+'T00:00:00'); return {d:d.toLocaleDateString('en-GB',{day:'numeric'}), m:d.toLocaleDateString('en-GB',{month:'short'}).toUpperCase()}; }
+function fmtLong(iso){ const d=new Date(iso+'T00:00:00'); return d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}); }
+function initials(name){ return (name||'?').split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'?'; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function outcome(r){ return r.gf>r.ga?'W':(r.gf<r.ga?'L':'D'); }
+function teamsLine(m){ return m.home ? `<em>Seleni FC</em> vs ${esc(m.opponent)}` : `${esc(m.opponent)} vs <em>Seleni FC</em>`; }
+
+/* ---------- render ---------- */
+function renderAll(){
+  renderHeroStats(); renderNext(); renderForm(); renderFixtures(); renderResults(); renderSquad(); renderEditors();
+}
+
+function renderSquad(){
+  const el=document.getElementById('squadList');
+  const ps=[...(DATA.players||[])].sort((a,b)=>(+a.num||0)-(+b.num||0));
+  const sil=`<svg viewBox="0 0 100 120" width="110" fill="rgba(255,255,255,.16)"><circle cx="50" cy="34" r="19"/><path d="M50 57 C27 57 15 77 13 120 L87 120 C85 77 73 57 50 57 Z"/></svg>`;
+  el.innerHTML = ps.length ? ps.map(p=>`
+    <article class="player">
+      <span class="num">${esc(p.num)}</span>
+      <div class="sil">${sil}</div>
+      <div class="pinfo"><span class="ppos">${esc(p.pos||'')}</span><div class="pname">${esc(p.name||'')}</div>${p.captain?'<span class="pcap">Captain</span>':''}</div>
+    </article>`).join('') : `<div class="empty" style="grid-column:1/-1">No players yet. Add them in <b>Manage → Squad</b>.</div>`;
+}
+
+function renderHeroStats(){
+  const played = DATA.results.length;
+  const wins = DATA.results.filter(r=>outcome(r)==='W').length;
+  const gf = DATA.results.reduce((a,r)=>a+(+r.gf||0),0);
+  document.getElementById('heroStats').innerHTML = `
+    <div><b>${played}</b><small>Played</small></div>
+    <div><b>${wins}</b><small>Wins</small></div>
+    <div><b>${gf}</b><small>Goals For</small></div>
+    <div><b>${DATA.fixtures.length}</b><small>Upcoming</small></div>`;
+}
+
+function nextFixture(){
+  const up = [...DATA.fixtures].sort((a,b)=> (a.date+ (a.time||'')).localeCompare(b.date+(b.time||'')));
+  return up.find(f=>f.date>=todayISO()) || up[0] || null;
+}
+
+function renderNext(){
+  const f = nextFixture();
+  const mount = document.getElementById('nextMount');
+  if(!f){ mount.innerHTML = `<div class="empty">No fixtures scheduled yet. Use <b>Manage</b> to add one.</div>`; return; }
+  const home = f.home;
+  const left = home
+    ? `<div class="side"><svg class="cr" aria-hidden="true"><use href="#crest"/></svg><span class="nm">Seleni FC</span></div>`
+    : `<div class="side"><div class="oppbadge">${esc(initials(f.opponent))}</div><span class="nm">${esc(f.opponent)}</span></div>`;
+  const right = home
+    ? `<div class="side"><div class="oppbadge">${esc(initials(f.opponent))}</div><span class="nm">${esc(f.opponent)}</span></div>`
+    : `<div class="side"><svg class="cr" aria-hidden="true"><use href="#crest"/></svg><span class="nm">Seleni FC</span></div>`;
+  mount.innerHTML = `
+    <div class="next">
+      <div class="top"><span class="c">${esc(f.comp||'Match')}</span><span>${fmtLong(f.date)} · ${esc(f.time||'')}</span></div>
+      <div class="fix">
+        ${left}
+        <div class="mid">
+          <span class="vs">VS</span>
+          <div class="cd" id="cd"><div><b id="cdd">--</b><small>Days</small></div><div><b id="cdh">--</b><small>Hrs</small></div><div><b id="cdm">--</b><small>Min</small></div></div>
+        </div>
+        ${right}
+      </div>
+      <div class="foot"><span>Venue <b>${esc(f.venue||'TBC')}</b></span><span>Kick-off <b>${esc(f.time||'TBC')}</b></span><span>${home?'<b>Home</b>':'<b>Away</b>'} fixture</span></div>
+    </div>`;
+  startCountdown(f.date + 'T' + (f.time||'15:00'));
+}
+
+let cdTimer=null;
+function startCountdown(iso){
+  if(cdTimer) clearInterval(cdTimer);
+  const target = new Date(iso).getTime();
+  function tick(){
+    const dEl=document.getElementById('cdd'); if(!dEl){clearInterval(cdTimer);return;}
+    let diff=Math.max(0,target-Date.now());
+    const dd=Math.floor(diff/864e5); diff-=dd*864e5;
+    const hh=Math.floor(diff/36e5);  diff-=hh*36e5;
+    const mm=Math.floor(diff/6e4);
+    dEl.textContent=dd; document.getElementById('cdh').textContent=String(hh).padStart(2,'0'); document.getElementById('cdm').textContent=String(mm).padStart(2,'0');
+  }
+  tick(); cdTimer=setInterval(tick,1000*30);
+}
+
+function renderForm(){
+  const last5 = [...DATA.results].sort((a,b)=>a.date.localeCompare(b.date)).slice(-5);
+  const mount=document.getElementById('formMount');
+  if(!last5.length){ mount.innerHTML=''; return; }
+  mount.innerHTML = `<span class="lbl">Recent form</span>` + last5.map(r=>{const o=outcome(r);return `<span class="pip ${o}" title="${esc(r.opponent)} ${r.gf}-${r.ga}">${o}</span>`;}).join('');
+}
+
+function renderFixtures(){
+  const up=[...DATA.fixtures].sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||'')));
+  const el=document.getElementById('fixturesList');
+  if(!up.length){ el.innerHTML=`<div class="empty">No upcoming fixtures. Add one in <b>Manage</b>.</div>`; return; }
+  el.innerHTML = up.map(f=>{const d=fmtDay(f.date);return `
+    <div class="row">
+      <div class="date"><b>${d.d}</b><small>${d.m}</small></div>
+      <div class="mu"><span class="comp">${esc(f.comp||'Match')}</span><span class="teams">${teamsLine(f)}</span><span class="ven">${esc(f.venue||'TBC')} · ${esc(f.time||'TBC')}</span></div>
+      <div class="end"><span class="ha">${f.home?'Home':'Away'}</span></div>
+    </div>`;}).join('');
+}
+
+function renderResults(){
+  const past=[...DATA.results].sort((a,b)=>b.date.localeCompare(a.date));
+  const el=document.getElementById('resultsList');
+  if(!past.length){ el.innerHTML=`<div class="empty">No results yet. Add one in <b>Manage</b>.</div>`; return; }
+  el.innerHTML = past.map(r=>{const d=fmtDay(r.date);const o=outcome(r);return `
+    <div class="row">
+      <div class="date"><b>${d.d}</b><small>${d.m}</small></div>
+      <div class="mu"><span class="comp">${esc(r.comp||'Match')}</span><span class="teams">${teamsLine(r)}</span><span class="ven">${esc(r.venue||'')}</span></div>
+      <div class="end"><span class="score">${r.gf}–${r.ga}</span><span class="res-pill ${o}">${o}</span></div>
+    </div>`;}).join('');
+}
+
+/* ---------- editors ---------- */
+function renderEditors(){
+  const fl=document.getElementById('fixEditList');
+  const up=[...DATA.fixtures].sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||'')));
+  fl.innerHTML = up.length ? up.map(f=>`
+    <div class="mini">
+      <div class="mtxt"><b>${f.home?'Seleni':'@ '+esc(f.opponent)} ${f.home?'vs '+esc(f.opponent):''}</b><small>${fmtLong(f.date)} · ${esc(f.comp||'')}</small></div>
+      <button class="ic" title="Edit" onclick="editFixture('${f.id}')">✎</button>
+      <button class="ic del" title="Delete" onclick="delFixture('${f.id}')">🗑</button>
+    </div>`).join('') : `<p class="hint">No fixtures yet.</p>`;
+
+  const rl=document.getElementById('resEditList');
+  const past=[...DATA.results].sort((a,b)=>b.date.localeCompare(a.date));
+  rl.innerHTML = past.length ? past.map(r=>`
+    <div class="mini">
+      <div class="mtxt"><b>${esc(r.opponent)} ${r.gf}–${r.ga}</b><small>${fmtLong(r.date)} · ${outcome(r)==='W'?'Win':outcome(r)==='L'?'Loss':'Draw'}</small></div>
+      <button class="ic" title="Edit" onclick="editResult('${r.id}')">✎</button>
+      <button class="ic del" title="Delete" onclick="delResult('${r.id}')">🗑</button>
+    </div>`).join('') : `<p class="hint">No results yet.</p>`;
+
+  const sl=document.getElementById('sqdEditList');
+  const ps=[...(DATA.players||[])].sort((a,b)=>(+a.num||0)-(+b.num||0));
+  sl.innerHTML = ps.length ? ps.map(p=>`
+    <div class="mini">
+      <div class="mtxt"><b>#${esc(p.num)} ${esc(p.name)}</b><small>${esc(p.pos||'')}${p.captain?' · Captain':''}</small></div>
+      <button class="ic" title="Edit" onclick="editPlayer('${p.id}')">✎</button>
+      <button class="ic del" title="Remove" onclick="delPlayer('${p.id}')">🗑</button>
+    </div>`).join('') : `<p class="hint">No players yet.</p>`;
+}
+
+let editingFix=null, editingRes=null;
+
+function saveFixture(){
+  const opp=document.getElementById('fOpp').value.trim();
+  const date=document.getElementById('fDate').value;
+  if(!opp||!date){ toast('Add an opponent and date'); return; }
+  const obj={ id: editingFix||uid(), date, time:document.getElementById('fTime').value||'15:00',
+    comp:document.getElementById('fComp').value.trim()||'Match', opponent:opp,
+    home:document.getElementById('fHome').value==='true', venue:document.getElementById('fVen').value.trim()||'TBC' };
+  if(editingFix){ DATA.fixtures=DATA.fixtures.map(f=>f.id===editingFix?obj:f); } else { DATA.fixtures.push(obj); }
+  commit('Fixture saved'); resetFixtureForm();
+}
+function editFixture(id){
+  const f=DATA.fixtures.find(x=>x.id===id); if(!f)return; editingFix=id;
+  document.getElementById('fOpp').value=f.opponent; document.getElementById('fDate').value=f.date;
+  document.getElementById('fTime').value=f.time||'15:00'; document.getElementById('fComp').value=f.comp||'';
+  document.getElementById('fHome').value=String(f.home); document.getElementById('fVen').value=f.venue||'';
+  document.getElementById('fixFormTitle').textContent='Edit fixture';
+  document.getElementById('fCancel').style.display=''; switchTab('fixtures');
+  document.querySelector('.panel .body').scrollTo({top:0,behavior:'smooth'});
+}
+function delFixture(id){ DATA.fixtures=DATA.fixtures.filter(f=>f.id!==id); commit('Fixture deleted'); if(editingFix===id)resetFixtureForm(); }
+function resetFixtureForm(){ editingFix=null; ['fOpp','fVen'].forEach(i=>document.getElementById(i).value=''); document.getElementById('fDate').value=''; document.getElementById('fTime').value='15:00'; document.getElementById('fComp').value='League'; document.getElementById('fHome').value='true'; document.getElementById('fixFormTitle').textContent='Add a fixture'; document.getElementById('fCancel').style.display='none'; }
+
+function saveResult(){
+  const opp=document.getElementById('rOpp').value.trim();
+  const date=document.getElementById('rDate').value;
+  const gf=document.getElementById('rGf').value, ga=document.getElementById('rGa').value;
+  if(!opp||!date||gf===''||ga===''){ toast('Fill opponent, date and both scores'); return; }
+  const obj={ id: editingRes||uid(), date, comp:document.getElementById('rComp').value.trim()||'Match',
+    opponent:opp, home:document.getElementById('rHome').value==='true', gf:+gf, ga:+ga,
+    venue:document.getElementById('rVen').value.trim()||'' };
+  if(editingRes){ DATA.results=DATA.results.map(r=>r.id===editingRes?obj:r); } else { DATA.results.push(obj); }
+  commit('Result saved'); resetResultForm();
+}
+function editResult(id){
+  const r=DATA.results.find(x=>x.id===id); if(!r)return; editingRes=id;
+  document.getElementById('rOpp').value=r.opponent; document.getElementById('rDate').value=r.date;
+  document.getElementById('rComp').value=r.comp||''; document.getElementById('rHome').value=String(r.home);
+  document.getElementById('rGf').value=r.gf; document.getElementById('rGa').value=r.ga; document.getElementById('rVen').value=r.venue||'';
+  document.getElementById('resFormTitle').textContent='Edit result';
+  document.getElementById('rCancel').style.display=''; switchTab('results');
+  document.querySelector('.panel .body').scrollTo({top:0,behavior:'smooth'});
+}
+function delResult(id){ DATA.results=DATA.results.filter(r=>r.id!==id); commit('Result deleted'); if(editingRes===id)resetResultForm(); }
+function resetResultForm(){ editingRes=null; ['rOpp','rVen','rGf','rGa'].forEach(i=>document.getElementById(i).value=''); document.getElementById('rDate').value=''; document.getElementById('rComp').value='League'; document.getElementById('rHome').value='true'; document.getElementById('resFormTitle').textContent='Add a result'; document.getElementById('rCancel').style.display='none'; }
+
+async function commit(msg){ await Store.save(DATA); renderAll(); toast(msg||'Saved'); }
+
+/* ---------- squad CRUD ---------- */
+let editingPlr=null;
+function savePlayer(){
+  const name=document.getElementById('sName').value.trim();
+  const num=document.getElementById('sNum').value;
+  if(!name||num===''){ toast('Add a name and number'); return; }
+  const cap=document.getElementById('sCap').checked;
+  const obj={ id: editingPlr||uid(), num:+num, name, pos:document.getElementById('sPos').value.trim()||'Squad', captain:cap };
+  if(!Array.isArray(DATA.players)) DATA.players=[];
+  if(cap) DATA.players.forEach(p=>p.captain=false);
+  if(editingPlr){ DATA.players=DATA.players.map(p=>p.id===editingPlr?obj:p); } else { DATA.players.push(obj); }
+  commit('Player saved'); resetPlayerForm();
+}
+function editPlayer(id){
+  const p=(DATA.players||[]).find(x=>x.id===id); if(!p)return; editingPlr=id;
+  document.getElementById('sNum').value=p.num; document.getElementById('sName').value=p.name;
+  document.getElementById('sPos').value=p.pos||''; document.getElementById('sCap').checked=!!p.captain;
+  document.getElementById('sqdFormTitle').textContent='Edit player';
+  document.getElementById('sCancel').style.display=''; switchTab('squad');
+  document.querySelector('.panel .body').scrollTo({top:0,behavior:'smooth'});
+}
+function delPlayer(id){ DATA.players=(DATA.players||[]).filter(p=>p.id!==id); commit('Player removed'); if(editingPlr===id)resetPlayerForm(); }
+function resetPlayerForm(){ editingPlr=null; ['sNum','sName','sPos'].forEach(i=>document.getElementById(i).value=''); document.getElementById('sCap').checked=false; document.getElementById('sqdFormTitle').textContent='Add a player'; document.getElementById('sCancel').style.display='none'; }
+
+/* ---------- import / export / reset ---------- */
+function exportData(){
+  const blob=new Blob([JSON.stringify(DATA,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='seleni-fc-data.json'; a.click(); URL.revokeObjectURL(a.href); toast('Backup downloaded');
+}
+function importData(ev){
+  const file=ev.target.files[0]; if(!file)return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ const d=JSON.parse(r.result);
+      if(!Array.isArray(d.fixtures)||!Array.isArray(d.results)) throw 0;
+      if(!Array.isArray(d.players)) d.players=[];
+      DATA=d; commit('Data imported'); }catch(e){ toast('That file could not be read'); } };
+  r.readAsText(file); ev.target.value='';
+}
+function resetAll(){ if(confirm('Reset all fixtures and results back to the sample data?')){ DATA=sampleData(); commit('Reset to sample data'); } }
+
+/* ---------- panel + ui ---------- */
+function openPanel(tab){ document.getElementById('panel').classList.add('open'); document.getElementById('scrim').classList.add('open'); if(tab)switchTab(tab); }
+function closePanel(){ document.getElementById('panel').classList.remove('open'); document.getElementById('scrim').classList.remove('open'); }
+function switchTab(t){
+  const map={fixtures:'paneFix',results:'paneRes',squad:'paneSquad'};
+  Object.values(map).forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById(map[t]||'paneFix').style.display='';
+  document.getElementById('tabFix').classList.toggle('active',t==='fixtures');
+  document.getElementById('tabRes').classList.toggle('active',t==='results');
+  document.getElementById('tabSqd').classList.toggle('active',t==='squad');
+}
+let toastT=null;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1900); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape')closePanel(); });
+
+/* ---------- init ---------- */
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+function initReveal(){
+  if(!('IntersectionObserver' in window)){ document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in')); return; }
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+
+(async function init(){
+  const saved=await Store.load();
+  if(saved && Array.isArray(saved.fixtures) && Array.isArray(saved.results)){
+    if(!Array.isArray(saved.players)) saved.players=sampleData().players; // migrate older saves
+    DATA=saved;
+  }
+  renderAll();
+  initReveal();
+  scheduleHide();
+})();
+</script>
+</body>
+</html>
