@@ -1,0 +1,142 @@
+{
+  "club": "Seleni FC",
+  "fixtures": [
+    {
+      "id": "mqolz17i3qrkl",
+      "date": "2026-07-25",
+      "time": "15:00",
+      "comp": "League",
+      "opponent": "Riverside Athletic",
+      "home": true,
+      "venue": "Seleni Park"
+    },
+    {
+      "id": "mqolz17i4opgo",
+      "date": "2026-08-02",
+      "time": "14:00",
+      "comp": "League",
+      "opponent": "Kingsbridge FC",
+      "home": false,
+      "venue": "Kingsbridge Recreation Ground"
+    },
+    {
+      "id": "mqolz17i97irw",
+      "date": "2026-08-09",
+      "time": "15:00",
+      "comp": "Cup",
+      "opponent": "Hollowood Town",
+      "home": true,
+      "venue": "Seleni Park"
+    }
+  ],
+  "results": [
+    {
+      "id": "mqolz17i7uf33",
+      "date": "2026-06-14",
+      "comp": "League",
+      "opponent": "Eastfield United",
+      "home": true,
+      "gf": 3,
+      "ga": 1,
+      "venue": "Seleni Park"
+    },
+    {
+      "id": "mqolz17ijyx8v",
+      "date": "2026-06-07",
+      "comp": "League",
+      "opponent": "St. Mark's",
+      "home": false,
+      "gf": 2,
+      "ga": 2,
+      "venue": "Marsh Lane"
+    },
+    {
+      "id": "mqolz17jbdt0e",
+      "date": "2026-05-31",
+      "comp": "Cup",
+      "opponent": "Marlow Rangers",
+      "home": true,
+      "gf": 1,
+      "ga": 0,
+      "venue": "Seleni Park"
+    },
+    {
+      "id": "mqolz17jjj2jr",
+      "date": "2026-05-24",
+      "comp": "League",
+      "opponent": "Northgate",
+      "home": false,
+      "gf": 0,
+      "ga": 2,
+      "venue": "Northgate Park"
+    },
+    {
+      "id": "mqolz17j166it",
+      "date": "2026-05-17",
+      "comp": "League",
+      "opponent": "Verdale FC",
+      "home": true,
+      "gf": 4,
+      "ga": 0,
+      "venue": "Seleni Park"
+    }
+  ],
+  "players": [
+    {
+      "id": "mqolz17j314ef",
+      "num": 1,
+      "name": "Daniel Okafor",
+      "pos": "Goalkeeper",
+      "captain": false
+    },
+    {
+      "id": "mqolz17jhcaet",
+      "num": 4,
+      "name": "James Whitlock",
+      "pos": "Defender",
+      "captain": true
+    },
+    {
+      "id": "mqolz17jh995i",
+      "num": 5,
+      "name": "Tom Hargreaves",
+      "pos": "Defender",
+      "captain": false
+    },
+    {
+      "id": "mqolz17jgqvx5",
+      "num": 6,
+      "name": "Sam Ellison",
+      "pos": "Midfielder",
+      "captain": false
+    },
+    {
+      "id": "mqolz17j9q3ce",
+      "num": 8,
+      "name": "Reece Carter",
+      "pos": "Midfielder",
+      "captain": false
+    },
+    {
+      "id": "mqolz17jgptyk",
+      "num": 7,
+      "name": "Leo Marchetti",
+      "pos": "Winger",
+      "captain": false
+    },
+    {
+      "id": "mqolz17jyyjqe",
+      "num": 10,
+      "name": "Aryan Lala",
+      "pos": "Forward",
+      "captain": false
+    },
+    {
+      "id": "mqolz17jwpkl6",
+      "num": 9,
+      "name": "Marcus Boateng",
+      "pos": "Striker",
+      "captain": false
+    }
+  ]
+}
